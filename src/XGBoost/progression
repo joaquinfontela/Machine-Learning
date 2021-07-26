@@ -1,0 +1,21 @@
+XGBoost (2)
+- Primer modelo:
+	- El GridSearch a partir de este modelo lo realizamos de manera manual, es decir, implementamos uno propio. Esto fue debido a que notamos que en ciertas situaciones, el resultado que el grid search de sklearn indicaba como optimo, no lo terminaba siendo para nuestro set de validacion (que en gran medida estaba correlacionado con el resultado final en driven data).
+	- A partir de varios GridSearch exhaustivos (mas de 100 combinaciones que debian correr durante toda la noche), conseguimos un primer optimo con los hiperparams: n_estimators 350, subsample = 0.95, gamma = 1, learning_rate = 0.55.
+	- En cuanto a feature engineering no hubo cambios con respecto al RF optimo: no sacamos columnas y las categoricas fueron encodeadas con OneHot.
+	- Puntaje: 0.7431.
+-Segundo modelo:
+	- A partir de nuevos GridSearch nos topamos con el modelo optimo, modificando con respecto al anterior: learning_rate a 0.45 y, con un poco de suerte, ya que la idea era poner otro valor y no este que fue arbitrario, subsample a 0.885.
+	- Puntaje: 0.743577.
+-Tercer modelo:
+	- Nuevas ejecuciones de GridSearch nos hicieron darnos cuenta de los afotunados que fuimos al probar el valor 0.885: alejandonos muy poco de este valor, el score bajaba notablemente. Sin embargo, encontramos lo que termino siendo nuestro segundo mejor puntaje para XGBoost (0.7434), cambiando con respecto al mejor gamma a 0.5 y subsample a 0.95.
+- Cuarto modelo:
+	- Aca cometimos un error ya que utilizamos como parametro de decision de eliminacion de features, el feature_importance que nos dio el XGBoost, que no es un indicador tan acertado como lo puede ser el RF.
+	- A partir de los datos de feature_importance, entrenamos nuevamente los mejores modelos quitando las 10 columnas que el XGBoost indicaba como menos importantes. En todos los casos, el puntaje bajo.
+- Quinto modelo:
+	- Intentamos ver si cambiaba algo el agregar weighting para reducir la influencia de que hubiera mas registros clasificados con cierto grado de daño que con cierto otro. Sin embargo, el puntaje permanecio igual.
+- Sexto modelo:
+	- Agregamos Bagging sobre el mejor modelo de XGBoost. Elegimos 5 n_estimators para el Bagging (mas darian un mejor resultado, pero la diferencia es despreciable y el incremento de tiempo al entrenar es lineal).
+	- Con esta optimizacion, el modelo escala su puntaje hasta aproximadamente 0.7448.
+
+	

@@ -1,4 +1,4 @@
-Random Forest
+Random Forest (1)
 - Primer modelo:
 	- n_estimators = 100, max_depth = 15, max_features = 45. 
 	- Redujimos la cantidad de columnas: solo usamos 'geo_level_1_id', 'foundation_type', 'ground_floor_type', 'age', 'area_percentage' y las que indicaban las superestructuras.
