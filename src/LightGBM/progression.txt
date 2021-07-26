@@ -1,0 +1,22 @@
+LightGBM (4)
+Una gran ventaja de este modelo es que entrena MUY rapido. Cada entrenamiento tardaba en el peor de los casos 30s, con lo cual nos permitia probar muchas cosas distintas sin tener que destinarle dias o incluso semanas como con otros modelos.
+- Segundo modelo (el archivo del primer modelo quedo inutilizado):
+	-Algunos Grid Search nos permitieron arrancar con buenos hiperparams iniciales.
+	- En cuanto a feature engineering, seguimos con el mismo modelo de utilizar todas las columnas. En este caso en puntual probamos aplicar mean encoding para geo_level_2 y 3 _id, pero el resultado fue peor que si no lo hubieramos hecho (para sorpresa nuestra) con lo cual la idea quedo descartada.
+	- El puntaje fue de 0.7366.
+- Tercer modelo:
+	- Quitando el mean encoding, el onehot encoding al geo_level_1_id, aumentando el hiperparam n_estimators de 1000 a 1600 y dejando el resto igual obtuvimos un puntaje de 0.7395.
+- Cuarto/quinto modelo:
+	- En este caso, pasamos nuevamente a 1000 n_estimators, y aplicamos onehot encoding a las cols geo_level 1 y 2 _id. A pesar de obtener un muy buen puntaje, decidimos de ahi en mas solo encodear el geo level 1, ya que al hacerlo con el 2 nos agregaba demasiadas columnas extra debido a la gran cantidad de valores posibles.
+	- Puntaje: 0.7438.
+- Sexto modelo:
+	- Dejamos de lado el onehot encoding para geo_level_2_id por la razon mencionada anteriormente y aumentamos levemente los n estimators hasta 1800 debido a un resultado de un grid search.
+	- Ademas, realizamos un extra de feature engineering, calculando el volumen de las construcciones, la cantidad de familias por unidad de area y la altura promedio por piso.
+	-  A pesar de agregar informacion extra, el puntaje del modelo cayo hasta 0.7404 con lo cual se deshecho la idea.
+- Septimo modelo:
+	- Probamos balancear los registros segun la clase (grado de daño), manteniendo todo el resto del modelo igual al optimo encontrado (0.7433 usando el cuarto sin el one hot encoding de geo_level_2_id). Sin embargo, esto hizo descender el puntaje del modelo con lo cual se descarto la idea.
+- Octavo modelo:
+	- Al igual que en los otros modelos, utilizamos Bagging para intentar mejorar el modelo por si solo.
+	- En este caso obtuvimos una mejora notable, obteniendo un puntaje de aproximadamente 0.7456 (incremento de 0.0023) utilizando 20 n_estimators para el Bagging.
+- Noveno modelo:
+	- Se intento nuevamente implementar el mean encoding para los geo_level para ver si cambiaba algo con el modelo optimizado. Sin embargo, no hubo resultados positivos: el geo_level_1_id encodeado mediante esta tecnica casi no vario el puntaje, y el 2 y el 3 lo empeoraron.
