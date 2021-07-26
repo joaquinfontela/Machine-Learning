@@ -1,0 +1,12 @@
+CatBoost (3)
+- Primer modelo:
+	- En esta primera etapa no nos quedamos con un unico modelo. Lo que hicimos fue correr un GridSearch y guardar en un archivo de extension CSV los resultados.
+	- La estructura del dataset fue la misma que la usada para el modelo optimo de XGBoost.
+- Segundo modelo:
+	- A partir de multiples GridSearch, encontramos un modelo que nos convencio (iterations = 5000, max_depth = None, learning_rate = 0.15, entre otros).
+	- Ademas, al momento de hacer el fit, le indicamos que las columnas geo_level_2_id y geo_level_3_id eran de tipo categoricas, lo cual incremento el puntaje del modelo. Luego nos enteramos que CatBoost encode considerando que los datos estan ordenados temporalmente, y a pesar de no ser asi esto en nuestro caso, como obtuvimos mejores resultados quedo como parte del modelo.
+	- En el fit tambien le pasamos un segundo parametro, eval_set, con el objetivo de evitar el overfitting. Esto mejoro el puntaje, aunque nos distorsiono el validation set ya que lo usamos dentro del entrenamiento. Esto genero que el puntaje indicado en los notebooks fuera de 0.7480 y en las entregas fuera 0.0015 puntos mas bajo aproximadamente.
+- Tercer modelo: 
+	- En este ultimo modelo lo unico que modificamos fue la cantidad de iteraciones ( de 5000 a 7500): ocurre algo similar a XGBoost, cuando uno las aumenta, mejora el modelo, pero el tiempo de entrenamiento aumenta linealmente, entonces uno debe decidir cuando no tiene sentido seguir aumentando la cant de iteraciones.
+	- Al igual que en el anterior modelo, utilizamos el set de validacion como parametro eval_set, con lo cual el puntaje en el notebook fue 0.7492 y en las entregas llego a 0.7476.
+	

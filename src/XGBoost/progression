@@ -17,5 +17,7 @@ XGBoost (2)
 - Sexto modelo:
 	- Agregamos Bagging sobre el mejor modelo de XGBoost. Elegimos 5 n_estimators para el Bagging (mas darian un mejor resultado, pero la diferencia es despreciable y el incremento de tiempo al entrenar es lineal).
 	- Con esta optimizacion, el modelo escala su puntaje hasta aproximadamente 0.7448.
+	
+- PD: se intento predecir con el XGBRegressor aproximando cada prediccion al entero mas cercano, sin embargo, el puntaje fue de unicamente 0.5498.
 
 	
