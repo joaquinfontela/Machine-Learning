@@ -1,0 +1,39 @@
+Random Forest
+- Primer modelo:
+	- n_estimators = 100, max_depth = 15, max_features = 45. 
+	- Redujimos la cantidad de columnas: solo usamos 'geo_level_1_id', 'foundation_type', 'ground_floor_type', 'age', 'area_percentage' y las que indicaban las superestructuras.
+	- Encodeamos las columnas categoricas y geo_level_1_id con OneHotEncoding.
+	- Puntaje: 0.6770.
+- Segundo modelo:
+	- Aumentamos los n_estimators a 150 luego de verificar a partir de testeos manuales que este era un buen valor.
+	- A diferencia del anterior dataset, en este no quitamos ninguna columna, ya que observamos que esto nos daba mejores resultados.
+	- Puntaje: 0.7108.
+- Tercer modelo:
+	- Corrimos un GridSearch y a partir del resultado de este, modificamos los siguientes hiperparametros: n_estimators paso a 100 nuevmanete y le quitamos la maxima profundidad al arbol (esto podria generar overfitting).
+	- Puntaje: 0.7254.
+- Cuarto modelo:
+	- Un nuevo GridSearch nos indico cambiar parametros: n_estimators a 150, y el seteo manual de dos nuevos params (min_samples_split a 5, min_samples_leaf a 1 (este ultimo valor podria generar overfitting)).
+	- Puntaje: 0.7348.
+- Quinto modelo:
+	- Luego de varios gridSearch encontramos el que finalizo siendo el mejor RF. Respecto al modelo anterior, solo cambio min_samples_split a 15.
+	- Puntaje: 0.7392.
+- Sexto modelo:
+	- Surge primer error conceptual.
+	- Este lo escribo yo que entiendo que paso.
+- Septimo modelo: 
+	- Con el feature engineering anterior, probando cambiar el hiperparam max_features a 0.2 y excluyendo del entrenamiento aquellas columnas que un entrenamiento anterior del modelo nos decian que tenian pequenia importancia.
+	- Puntaje: 0.7331.
+- Octavo modelo:
+	- Mismo error del sexto pero probando con otros hiperparametros.
+- Noveno modelo:
+	- Eliminamos todo el feature engineering que veniamos probando desde el sexto modelo ya que nos traia, a pesar de nuestra sorpresa, peores resultados.
+	- El modelo queda igual al mejor hasta el momento, el quinto.
+- Decimo modelo: 
+	- Se agrega el hiperparam class_weights con valor 'balanced' para balancear el peso de cada registro segun el grado de daño (ya que habia menos registros de grado de daño 1, que de 2 o 3).
+	- Intento fallido: puntaje 0.7242.
+- Undecimo modelo:
+	- Se prueba el BaggingClassifier para el RF, pero al ser un metodo que ya incluye la randomizacion, el puntaje permanece igual.
+
+-Aclarar que todos los puntajes son aproximados en este modelo ya que se incluye el azar en el armado de este.
+	
+
