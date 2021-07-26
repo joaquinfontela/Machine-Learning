@@ -1,0 +1,12 @@
+Otros modelos (6):
+Los siguientes modelos fueron descartados ya que su puntaje para los modelos fue muy bajo.
+- Bernoulli Naive Bayes:
+	- El puntaje mas alto al que se lo logro llevar fue 0.6242, y con Bagging no alcanzo el 0.63.
+- LogisticRegression:
+	- Se hizo un intento de incluirlo en el ensamble final ya que alcanzo un puntaje de 0.68 con el tuneo de los hiperparametros (y ademas es un modelo distinto a la mayoria de los presentes en el ensamble), pero fracaso ya que en todos los casos disminuia el puntaje del modelo principal.
+- NearestCentroid:
+	- El puntaje inicial fue de 0.44 y sin muchos hiperparametros a tunear, con lo cual se descarto inmediatamente.
+- SGDClassifier:
+	- Nunca finalizo de correr. Se recopilo informacion acerca de que es un metodo que no es eficiente para grandes volumenes de datos.
+- SVC:
+	- El puntaje inicial fue de 0.57 con lo cual tambien se descarto rapidamente.
