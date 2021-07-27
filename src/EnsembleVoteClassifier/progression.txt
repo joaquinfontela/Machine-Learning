@@ -1,0 +1,20 @@
+mlxtend.EnsembleVoteClassifier (6)
+En este punto, decidimos cambiar de VotingClassifier a uno de la libreria mlxtend: porque? Porque este Voting nos permitia enviarle los modelos ya entrenados, lo cual nos trajo dos beneficios:
+1) Nos permitia probar distintas combinaciones de pesos relativos entre los distintos modelos sin tener que reentrenarlos a todos.
+2) Nos permitia pasarle parametros al metodo fit de cada modelo en especifico (especialmente util para el CatBoost).
+- Primer modelo:
+	- Aca utilizamos nuestros mejores modelos para cada tipo (XGB, RF, LGBM, CatBoost, GradientBoosting). Ademas, agregamos los pesos que, probando a mano, nos generaron los mejores resultados.
+	- Puntaje: 0.7501.
+- Segundo modelo:
+	- En este caso, el nuevo cambio introducido tiene que ver con el Bagging. Ahora, para los modelos en los que notamos una mejora al aplicar esta tecnica, la utilizamos antes de enviarlos al Voting. Por lo tanto, hicimos un Bagging del XGB y del LGBM.
+	- RF mostro mejora con Bagging (como ya mencionamos en la correspondiente seccion).
+	- CatBoost y GB son modelos que tardan demasiado en entrenarse por si solos, el bagging los haria tardar mucho mas.
+	- Con esta nueva combinacion, sumada a una combinacion de pesos relativos, obtuvimos un puntaje de 0.7504.
+- Tercer/cuarto modelo:
+	- Es identico al antes mencionado pero utilizando el 100% del dataset.
+	- Puntaje: 0.7522.
+- Quinto/sexto modelo:
+	- Es un retoque de los pesos relativos del modelo anterior.
+	- En el que quedo como quinto modelo intentamos incluir la regresion logistica como sexto modelo del Voting, parecia dar mejor resultado localmente, pero al momento de subirlo a DrivenData dio un resultado peor. Tener en cuenta que la regresion logistica daba un puntaje mucho peor comparada al resto de los modelos (0.68 vs. el peor de los otros era 0.739).
+	- Puntaje al subirlo a driven data con el 100% del data set: 0.7524. Mejor modelo. 
+	

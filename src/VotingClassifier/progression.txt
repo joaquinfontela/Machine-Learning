@@ -1,0 +1,20 @@
+VotingClassifier (5)
+Este es un modelo que permite combinar, mediante votacion, las predicciones de distintos modelos.
+El objeto sera potenciar unos modelos con otros, utilizando los mejores generados por nosotros.
+- Primer modelo:
+	- Usamos los mejores dos XGBoost, el mejor RF, los dos mejores LGBM y el mejor GradientBoosting. Todos puntuan por encima de 0.739.
+	- El parametro voting lo definimos como 'soft' ya que observamos que daba mejores resultados que 'hard'.
+	- Obtuvimos el mejor puntaje hasta el momento: 0.7502.
+- Segundo modelo:
+	- Es un intento de StackingClassifier que no prospero. Aclarar que para este punto ya descartabamos todo lo que no nos convenciera ya que estabamos con el objetivo de alcanzar la maxima puntuacion posible.
+-Tercer modelo:
+	- Intentamos reducir el Voting a las mejores combinaciones obtenidas de hiperparametros de un unico modelo (LightGBM). 
+	- Ademas, usamos OneHotEncoding para 'geo_level_2_id', algo que no veniamos haciendo.
+	- Por ultimo, por primera vez le agregamos pesos relativos a los distintos modelos del Voting, para que la prediccion de cada modelo valga mas o menos en la votacion.
+	- El resultado fue malo, principalmente por usar OH Encoding para el geo_level_2_id: 0.7285.
+- Cuarto modelo:
+	- Por ultimo, creamos un modelo Voting agregandole nuestro mejor modelo de CatBoost al mejor modelo de Voting que teniamos (el primero de los mencionados en esta seccion).
+	- Ademas, agregamos algo que fue clave al momento de sumar mas puntos para la competencia: una vez teniamos identificados los mejores modelos, los volviamos a entrenar con todo el dataset (es decir, no nos guardabamos una porcion para hacerla set de validacion). De esta manera, el modelo se entrenaba con mas datos y nos generaba una mejor prediccion en DrivenData.
+	- Logramos alcanzar un puntaje de 0.7522.
+
+	

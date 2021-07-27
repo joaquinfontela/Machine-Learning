@@ -1,4 +1,4 @@
-Otros modelos (6):
+Otros modelos (7):
 Los siguientes modelos fueron descartados ya que su puntaje para los modelos fue muy bajo.
 - Bernoulli Naive Bayes:
 	- El puntaje mas alto al que se lo logro llevar fue 0.6242, y con Bagging no alcanzo el 0.63.
