@@ -1,7 +1,5 @@
 <p align="center"><h1 align="center">Machine-Learning</h1></p>
 
-<br><p align="center"><img src="./img/logogrupo.png"/></p>
-
 | Padrón | Alumno                    |
 |--------|---------------------------|
 | 104105 | Jonathan David Rosenblatt |
